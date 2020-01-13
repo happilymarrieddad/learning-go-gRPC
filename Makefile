@@ -19,6 +19,7 @@ install:
 		github.com/onsi/gomega/... \
 		github.com/SafetyCulture/s12-proto/protobuf/protoc-gen-gogrpcmock
 	go install github.com/SafetyCulture/s12-proto/protobuf/protoc-gen-gogrpcmock
+	go get -tags 'mysql' -u github.com/golang-migrate/migrate/cmd/migrate
 
 clean:
 	rm ./pb/**/*.pb.go

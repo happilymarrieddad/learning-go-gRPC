@@ -28,6 +28,10 @@ sudo apt install mysql-server
 
 ## Section 2 - 
 1. setup migrations
+    - installing
+    - https://github.com/golang-migrate/migrate/tree/master/cmd/migrate
+    - migrate create -dir migrations -ext sql create_users_table
+    - migrate -path ./migrations -database mysql://root:pass@/grpc -verbose up
 2. Create `User` types
 3. Add validation
 
