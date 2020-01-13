@@ -46,6 +46,7 @@ sudo apt install mysql-server
 8. Discuss testing and install gomega && ginkgo
     - ginkgo bootstrap
 9. Add `Create` tests
+    - ginkgo -v -failFast --focus="UsersRepo"
 10. Add `FindById` tests
 11. Add `FindByEmail` tests
 12. Add `Update` tests
