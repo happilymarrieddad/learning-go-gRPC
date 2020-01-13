@@ -43,13 +43,12 @@ sudo apt install mysql-server
 4. Add `FindById` func
 5. Add `FindByEmail` func
 6. Add `Update` func
-7. Add `Destroy` func
 8. Discuss testing and install gomega && ginkgo
+    - ginkgo bootstrap
 9. Add `Create` tests
 10. Add `FindById` tests
 11. Add `FindByEmail` tests
 12. Add `Update` tests
-13. Add `Destroy` tests
 14. Run full tests suites
 15. Generate mocks for repos
 

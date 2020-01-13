@@ -68,7 +68,7 @@ func (u *User) Authenticate(password string) error {
 		return fmt.Errorf("user is inactive")
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(u.Password), password); err != nil {
+	if err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(password)); err != nil {
 		return err
 	}
 
