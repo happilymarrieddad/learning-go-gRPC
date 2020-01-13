@@ -38,6 +38,7 @@ sudo apt install mysql-server
 ## Section 3 - setup repos
 1. Create global repo
 2. Create users repo
+    - https://xorm.io/
 3. Add `Create` func
 4. Add `FindById` func
 5. Add `FindByEmail` func
