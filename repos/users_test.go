@@ -172,4 +172,43 @@ var _ = Describe("UsersRepo", func() {
 		})
 	})
 
+	Describe("Update", func() {
+		Context("Failure", func() {
+			It("should fail with nil parameter", func() {
+				err := gr.Users().Update(nil)
+				Ω(err).NotTo(BeNil())
+				Ω(err.Error()).To(Equal("invalid user passed in"))
+			})
+			It("should fail with an invalid user (requires ID)", func() {
+				err := gr.Users().Update(usr)
+				Ω(err).NotTo(BeNil())
+				Ω(err.Error()).To(Equal("invalid user passed in"))
+			})
+			It("should fail with a database error", func() {
+				errMsg := "database error"
+				usr.ID = 1
+
+				mock.ExpectExec("UPDATE `users` SET `first_name` = ?, `last_name` = ?, `email` = ?, `password` = ? WHERE `id`=?").
+					WithArgs(usr.FirstName, usr.LastName, usr.Email, usr.Password, usr.ID).
+					WillReturnError(errors.New(errMsg))
+
+				err := gr.Users().Update(usr)
+				Ω(err).NotTo(BeNil())
+				Ω(err.Error()).To(Equal(errMsg))
+			})
+		})
+		Context("Success", func() {
+			It("should update a user", func() {
+				usr.ID = 1
+
+				mock.ExpectExec("UPDATE `users` SET `first_name` = ?, `last_name` = ?, `email` = ?, `password` = ? WHERE `id`=?").
+					WithArgs(usr.FirstName, usr.LastName, usr.Email, usr.Password, usr.ID).
+					WillReturnResult(sqlmock.NewResult(0, 1))
+
+				err := gr.Users().Update(usr)
+				Ω(err).To(BeNil())
+			})
+		})
+	})
+
 })
