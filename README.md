@@ -51,7 +51,6 @@ sudo apt install mysql-server
 10. Add `FindById` tests
 11. Add `FindByEmail` tests
 12. Add `Update` tests
-14. Run full tests suites
 15. Generate mocks for repos
 
 ## Section 4 - Protobuf

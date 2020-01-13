@@ -21,6 +21,7 @@ install:
 		github.com/go-sql-driver/mysql
 	go install github.com/SafetyCulture/s12-proto/protobuf/protoc-gen-gogrpcmock
 	go get -tags 'mysql' -u github.com/golang-migrate/migrate/cmd/migrate
+	go get github.com/golang/mock/mockgen
 
 clean:
 	rm ./pb/**/*.pb.go
