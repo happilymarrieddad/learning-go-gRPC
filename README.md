@@ -45,6 +45,7 @@ sudo apt install mysql-server
 6. Add `Update` func
 8. Discuss testing and install gomega && ginkgo
     - ginkgo bootstrap
+    - IF YOU WANT TO USE SQL-MOCK, please take a look at git branch `section3-lesson10`
 9. Add `Create` tests
     - ginkgo -v -failFast --focus="UsersRepo"
 10. Add `FindById` tests
