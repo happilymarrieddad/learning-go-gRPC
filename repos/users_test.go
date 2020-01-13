@@ -1,9 +1,6 @@
 package repos_test
 
 import (
-	"errors"
-
-	"github.com/DATA-DOG/go-sqlmock"
 	. "github.com/happilymarrieddad/learning-go-gRPC/types"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -51,23 +48,23 @@ var _ = Describe("UsersRepo", func() {
 						"Key: 'User.Email' Error:Field validation for 'Email' failed on the 'required' tag"),
 				)
 			})
-			It("should fail with database error", func() {
-				errMsg := "database unavailable"
+			// It("should fail with database error", func() {
+			// 	errMsg := "database unavailable"
 
-				mock.ExpectExec("INSERT INTO `users` (`first_name`,`last_name`,`email`,`password`,`visible`) VALUES (?, ?, ?, ?, ?)").
-					WithArgs(usr.FirstName, usr.LastName, usr.Email, usr.Password, usr.Visible).
-					WillReturnError(errors.New(errMsg))
+			// 	// mock.ExpectExec("INSERT INTO `users` (`first_name`,`last_name`,`email`,`password`,`visible`) VALUES (?, ?, ?, ?, ?)").
+			// 	// 	WithArgs(usr.FirstName, usr.LastName, usr.Email, usr.Password, usr.Visible).
+			// 	// 	WillReturnError(errors.New(errMsg))
 
-				err = gr.Users().Create(usr)
-				Ω(err).NotTo(BeNil())
-				Ω(err.Error()).To(Equal(errMsg))
-			})
+			// 	err = gr.Users().Create(usr)
+			// 	Ω(err).NotTo(BeNil())
+			// 	Ω(err.Error()).To(Equal(errMsg))
+			// })
 		})
 		Context("Success", func() {
 			It("successfully stored a user", func() {
-				mock.ExpectExec("INSERT INTO `users` (`first_name`,`last_name`,`email`,`password`,`visible`) VALUES (?, ?, ?, ?, ?)").
-					WithArgs(usr.FirstName, usr.LastName, usr.Email, usr.Password, usr.Visible).
-					WillReturnResult(sqlmock.NewResult(1, 1))
+				// mock.ExpectExec("INSERT INTO `users` (`first_name`,`last_name`,`email`,`password`,`visible`) VALUES (?, ?, ?, ?, ?)").
+				// 	WithArgs(usr.FirstName, usr.LastName, usr.Email, usr.Password, usr.Visible).
+				// 	WillReturnResult(sqlmock.NewResult(1, 1))
 
 				err = gr.Users().Create(usr)
 				Ω(err).To(BeNil())
