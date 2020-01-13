@@ -4,17 +4,27 @@ learning-go-gRPC
 ## Notes
 https://github.com/happilymarrieddad/learning-go-gRPC
 
-Put these in your bash
 
-bash```
+## Things to put in your bash
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/comp/go/bin
-```
+
+## Other things to install
+# Ubuntu
+sudo apt install mysql-server
+
+## Snippets
+{
+    "Omega Assertion": {
+        "prefix": "omega",
+        "body": "Ω($1)",
+        "description": "Ginkgo Gomega Assertion"
+    },
+}
 
 ## Section 1
 1. Intro
 2. Setup ENV
-3. Install mysql
 
 ## Section 2 - 
 1. setup migrations

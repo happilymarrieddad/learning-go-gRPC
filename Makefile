@@ -16,7 +16,8 @@ install:
 		github.com/gogo/protobuf/gogoproto \
 		github.com/DATA-DOG/go-sqlmock \
 		github.com/onsi/ginkgo/ginkgo \
-		github.com/onsi/gomega/...
+		github.com/onsi/gomega/... \
+		github.com/SafetyCulture/s12-proto/protobuf/protoc-gen-gogrpcmock
 	go install github.com/SafetyCulture/s12-proto/protobuf/protoc-gen-gogrpcmock
 
 clean:
