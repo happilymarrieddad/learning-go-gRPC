@@ -1,6 +1,16 @@
 learning-go-gRPC
 ====================
 
+## Notes
+https://github.com/happilymarrieddad/learning-go-gRPC
+
+Put these in your bash
+
+bash```
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/home/comp/go/bin
+```
+
 ## Section 1
 1. Intro
 2. Setup ENV
