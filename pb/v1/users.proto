@@ -7,10 +7,14 @@ import "types.proto";
 option go_package = "grpc";
 
 service V1Users {
-    rpc Create(types.CreateUser) returns (UserReply) {}
+    rpc Create(CreateUserRequest) returns (UserReply) {}
     rpc FindById(FindByIdRequest) returns (UserReply) {}
     rpc FindByEmail(FindByEmailRequest) returns (UserReply) {}
     rpc Update(UpdateUserRequest) returns (UserReply) {}
+}
+
+message CreateUserRequest {
+    types.User newUser = 1;
 }
 
 message FindByIdRequest {

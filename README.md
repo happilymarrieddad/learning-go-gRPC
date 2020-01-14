@@ -89,13 +89,11 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
 5. Flesh out users `FindById` route
 6. Flesh out users `FindByEmail` route
 7. Flesh out users `Update` route
-8. Flesh out us+-+----ers `Destroy` route
 9. Build initial users tests file
 10. Build `Create` tests
 11. Build `FindById` tests
 12. Build `FindByEmail` tests
 13. Build `Update` tests
-14. Build `Destroy` tests
 15. Run full test suite for users
 16. Flesh out auth `Login` route
 17. Build initial auth tests file

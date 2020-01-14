@@ -17,14 +17,14 @@ var _ = math.Inf
 
 type V1UsersMock struct{}
 
-func (m *V1UsersMock) Create(ctx context.Context, req *CreateUser) (*UserReply, error) {
+func (m *V1UsersMock) Create(ctx context.Context, req *CreateUserRequest) (*UserReply, error) {
 	res :=
 		&UserReply{
 			User: &User{
-				Id:        175,
-				FirstName: "ipsam",
+				Id:        565,
+				FirstName: "odit",
 				LastName:  "et",
-				Email:     "maiores_quasi@Vitz.gov",
+				Email:     "zGrant@Flashset.gov",
 				Visible:   true,
 			},
 		}
@@ -34,10 +34,10 @@ func (m *V1UsersMock) FindById(ctx context.Context, req *FindByIdRequest) (*User
 	res :=
 		&UserReply{
 			User: &User{
-				Id:        19,
-				FirstName: "blanditiis",
-				LastName:  "nihil",
-				Email:     "vel_eos_aut@Skidoo.mil",
+				Id:        606,
+				FirstName: "sunt",
+				LastName:  "aliquam",
+				Email:     "8Alvarez@Topdrive.name",
 				Visible:   true,
 			},
 		}
@@ -47,10 +47,10 @@ func (m *V1UsersMock) FindByEmail(ctx context.Context, req *FindByEmailRequest) 
 	res :=
 		&UserReply{
 			User: &User{
-				Id:        300,
-				FirstName: "suscipit",
-				LastName:  "nihil",
-				Email:     "tempora@Dabjam.net",
+				Id:        191,
+				FirstName: "a",
+				LastName:  "quia",
+				Email:     "animi_animi_magnam@Roodel.gov",
 				Visible:   true,
 			},
 		}
@@ -60,10 +60,10 @@ func (m *V1UsersMock) Update(ctx context.Context, req *UpdateUserRequest) (*User
 	res :=
 		&UserReply{
 			User: &User{
-				Id:        329,
-				FirstName: "voluptatibus",
-				LastName:  "quae",
-				Email:     "JuanMorgan@Edgewire.gov",
+				Id:        267,
+				FirstName: "sit",
+				LastName:  "est",
+				Email:     "sint_eos@Meemm.net",
 				Visible:   true,
 			},
 		}
