@@ -2,7 +2,10 @@ package users
 
 import (
 	"context"
-	pb "github.com/happilymarrieddad/gRPC/pb"
+
+	pb "github.com/happilymarrieddad/learning-go-gRPC/pb"
+	"github.com/happilymarrieddad/learning-go-gRPC/types"
+	"github.com/happilymarrieddad/learning-go-gRPC/utils"
 )
 
 type grpcHandler struct {
@@ -20,6 +23,29 @@ func (h *grpcHandler) Create(
 	err error,
 ) {
 	res = new(pb.UserReply)
+
+	if err = pb.Validate(req); err != nil {
+		return
+	}
+
+	globalRepo, err := utils.GetGlobalRepoFromContext(ctx)
+	if err != nil {
+		return
+	}
+
+	newUser, err := types.NewUser(&types.TempUser{
+		FirstName:       req.GetNewUser().GetFirstName(),
+		LastName:        req.GetNewUser().GetLastName(),
+		Email:           req.GetNewUser().GetEmail(),
+		Password:        req.GetNewUser().GetPassword(),
+		ConfirmPassword: req.GetNewUser().GetConfirmPassword(),
+	})
+
+	if err = globalRepo.Users().Create(newUser); err != nil {
+		return
+	}
+
+	res.User = newUser.ToProtobuf()
 
 	return
 }

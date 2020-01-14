@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+	pb "github.com/happilymarrieddad/learning-go-gRPC/pb"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -73,4 +74,15 @@ func (u *User) Authenticate(password string) error {
 	}
 
 	return nil
+}
+
+func (u *User) ToProtobuf() (nu *pb.User) {
+	nu = new(pb.User)
+
+	nu.FirstName = u.FirstName
+	nu.LastName = u.LastName
+	nu.Email = u.Email
+	nu.Visible = u.Visible
+
+	return
 }

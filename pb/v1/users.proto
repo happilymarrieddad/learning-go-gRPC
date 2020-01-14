@@ -14,7 +14,7 @@ service V1Users {
 }
 
 message CreateUserRequest {
-    types.User newUser = 1;
+    types.CreateUser newUser = 1;
 }
 
 message FindByIdRequest {
