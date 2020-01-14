@@ -34,6 +34,34 @@ func init() {
 		}
 
 	}, CreateUserRequest{})
+
+	validator.RegisterStructValidation(func(sl vCop.StructLevel) {
+		r := sl.Current().Interface().(FindByIdRequest)
+
+		if r.GetId() == 0 {
+			sl.ReportError("ID", "id", "ID", "valid-id", "")
+		}
+
+	}, FindByIdRequest{})
+
+	validator.RegisterStructValidation(func(sl vCop.StructLevel) {
+		r := sl.Current().Interface().(FindByEmailRequest)
+
+		if len(r.GetEmail()) == 0 {
+			sl.ReportError("Email", "email", "Email", "valid-email", "")
+		}
+
+	}, FindByEmailRequest{})
+
+	validator.RegisterStructValidation(func(sl vCop.StructLevel) {
+		r := sl.Current().Interface().(UpdateUserRequest)
+
+		if r.GetId() == 0 {
+			sl.ReportError("ID", "id", "ID", "valid-id", "")
+		}
+
+	}, UpdateUserRequest{})
+
 }
 
 func Validate(t interface{}) error {

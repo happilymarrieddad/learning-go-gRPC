@@ -65,6 +65,31 @@ var _ = Describe("grpc", func() {
 			Ω(err.Error()).To(Equal(errMsg))
 		})
 
+		It("should return error because global repo is missing from context", func() {
+			errMsg := "unable to get global repo from context"
+
+			user, err := types.NewUser(&types.TempUser{
+				FirstName:       "Nick",
+				LastName:        "Doe2",
+				Email:           "foo@bar.com",
+				Password:        "1234",
+				ConfirmPassword: "1234",
+			})
+			Ω(err).To(BeNil())
+
+			_, err = router.Create(context.Background(), &pb.CreateUserRequest{
+				NewUser: &pb.CreateUser{
+					FirstName:       user.FirstName,
+					LastName:        user.LastName,
+					Email:           user.Email,
+					Password:        "1234",
+					ConfirmPassword: "1234",
+				},
+			})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
 		It("should fail a database test", func() {
 			errMsg := "database is unavailable"
 

@@ -59,6 +59,22 @@ func (h *grpcHandler) FindById(
 ) {
 	res = new(pb.UserReply)
 
+	if err = pb.Validate(req); err != nil {
+		return
+	}
+
+	globalRepo, err := utils.GetGlobalRepoFromContext(ctx)
+	if err != nil {
+		return
+	}
+
+	user, err := globalRepo.Users().FindById(req.GetId())
+	if err != nil {
+		return
+	}
+
+	res.User = user.ToProtobuf()
+
 	return
 }
 
@@ -71,6 +87,22 @@ func (h *grpcHandler) FindByEmail(
 ) {
 	res = new(pb.UserReply)
 
+	if err = pb.Validate(req); err != nil {
+		return
+	}
+
+	globalRepo, err := utils.GetGlobalRepoFromContext(ctx)
+	if err != nil {
+		return
+	}
+
+	user, err := globalRepo.Users().FindByEmail(req.GetEmail())
+	if err != nil {
+		return
+	}
+
+	res.User = user.ToProtobuf()
+
 	return
 }
 
@@ -82,6 +114,40 @@ func (h *grpcHandler) Update(
 	err error,
 ) {
 	res = new(pb.UserReply)
+
+	if err = pb.Validate(req); err != nil {
+		return
+	}
+
+	globalRepo, err := utils.GetGlobalRepoFromContext(ctx)
+	if err != nil {
+		return
+	}
+
+	usersRepo := globalRepo.Users()
+
+	user, err := usersRepo.FindById(req.GetId())
+	if err != nil {
+		return
+	}
+
+	if len(req.FirstName) > 0 {
+		user.FirstName = req.GetFirstName()
+	}
+
+	if len(req.LastName) > 0 {
+		user.LastName = req.GetLastName()
+	}
+
+	if len(req.GetNewPassword()) > 0 {
+		if err = user.SetPassword(req.GetNewPassword()); err != nil {
+			return
+		}
+	}
+
+	if err = usersRepo.Update(user); err != nil {
+		return
+	}
 
 	return
 }
