@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package users;
+
+import "types.proto";
+
+option go_package = "grpc";
+
+service V1Users {
+    rpc Create(types.CreateUser) returns (UserReply) {}
+    rpc FindById(FindByIdRequest) returns (UserReply) {}
+    rpc FindByEmail(FindByEmailRequest) returns (UserReply) {}
+    rpc Update(UpdateUserRequest) returns (UserReply) {}
+}
+
+message FindByIdRequest {
+    int64 id = 1;
+}
+
+message FindByEmailRequest {
+    string email = 1;
+}
+
+message UpdateUserRequest {
+    int64 id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string newPassword = 4;
+}
+
+message UserReply {
+    types.User user = 1;
+}

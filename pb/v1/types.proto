@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package types;
+
+option go_package = "grpc";
+
+message CreateUser {
+    string firstName = 1;
+    string lastName = 2;
+    string email = 3;
+    string password = 4;
+    string confirmPassword = 5;
+}
+
+message User {
+    int64 id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string email = 4;
+    bool visible = 5;
+}

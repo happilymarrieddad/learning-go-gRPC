@@ -54,6 +54,27 @@ sudo apt install mysql-server
 15. Generate mocks for repos
 
 ## Section 4 - Protobuf
+If you get the wrong version of protobuf use these commands
+
+# Make sure you grab the latest version
+curl -OL https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip
+
+# Unzip
+unzip protoc-3.2.0-linux-x86_64.zip -d protoc3
+
+# Move protoc to /usr/local/bin/
+sudo mv protoc3/bin/* /usr/local/bin/
+
+# Move protoc3/include to /usr/local/include/
+sudo mv protoc3/include/* /usr/local/include/
+
+# Optional: change owner
+sudo chown $USER /usr/local/bin/protoc
+sudo chown -R $USER /usr/local/include/google
+
+# I did change the last step to:
+ln -s /protoc3/bin/protoc /usr/bin/protoc
+
 1. Intro to protobufs
 2. Add `types` protobuf
 3. Add `users` protobuf
