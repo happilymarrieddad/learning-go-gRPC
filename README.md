@@ -28,27 +28,53 @@ sudo apt install mysql-server
 
 ## Section 2 - 
 1. setup migrations
+    - installing
+    - https://github.com/golang-migrate/migrate/tree/master/cmd/migrate
+    - migrate create -dir migrations -ext sql create_users_table
+    - migrate -path ./migrations -database mysql://root:pass@/grpc -verbose up
 2. Create `User` types
 3. Add validation
 
 ## Section 3 - setup repos
 1. Create global repo
 2. Create users repo
+    - https://xorm.io/
 3. Add `Create` func
 4. Add `FindById` func
 5. Add `FindByEmail` func
 6. Add `Update` func
-7. Add `Destroy` func
 8. Discuss testing and install gomega && ginkgo
+    - ginkgo bootstrap
+    - IF YOU WANT TO USE SQL-MOCK, please take a look at git branch `section3-lesson10`
 9. Add `Create` tests
+    - ginkgo -v -failFast --focus="UsersRepo"
 10. Add `FindById` tests
 11. Add `FindByEmail` tests
 12. Add `Update` tests
-13. Add `Destroy` tests
-14. Run full tests suites
 15. Generate mocks for repos
 
 ## Section 4 - Protobuf
+If you get the wrong version of protobuf use these commands
+
+# Make sure you grab the latest version
+curl -OL https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip
+
+# Unzip
+unzip protoc-3.2.0-linux-x86_64.zip -d protoc3
+
+# Move protoc to /usr/local/bin/
+sudo mv protoc3/bin/* /usr/local/bin/
+
+# Move protoc3/include to /usr/local/include/
+sudo mv protoc3/include/* /usr/local/include/
+
+# Optional: change owner
+sudo chown $USER /usr/local/bin/protoc
+sudo chown -R $USER /usr/local/include/google
+
+# I did change the last step to:
+ln -s /protoc3/bin/protoc /usr/bin/protoc
+
 1. Intro to protobufs
 2. Add `types` protobuf
 3. Add `users` protobuf
@@ -63,13 +89,11 @@ sudo apt install mysql-server
 5. Flesh out users `FindById` route
 6. Flesh out users `FindByEmail` route
 7. Flesh out users `Update` route
-8. Flesh out us+-+----ers `Destroy` route
 9. Build initial users tests file
 10. Build `Create` tests
 11. Build `FindById` tests
 12. Build `FindByEmail` tests
 13. Build `Update` tests
-14. Build `Destroy` tests
 15. Run full test suite for users
 16. Flesh out auth `Login` route
 17. Build initial auth tests file
