@@ -111,6 +111,8 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
     - sudo make install grpc_cli
     - IF IT FAILS ON YOU DO THE FOLLOWING!!
         - I just found out a workaround. If you add -Wno-unused-variable to the cppflags at line 356 of Makefile at grpc root folder, the complier will ignore the unused variable warning/error.
+        - cp ./bins/opt/grpc_cli ~/go/bin
 2. Run grpc_cli ls command to see all available services
 3. Run grpc_cli call command to create a user
+    - grpc_cli call localhost:8080 users.V1Users.Create "newUser:{firstName:'Nick',lastName:'Doe2',email:'foo@bar.com',password:'1234',confirmPassword:'1234'}"
 4. Run grpc_cli call command to login with that user
