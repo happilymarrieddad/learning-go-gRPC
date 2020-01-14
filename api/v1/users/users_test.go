@@ -158,4 +158,201 @@ var _ = Describe("grpc", func() {
 
 	})
 
+	Describe("FindById", func() {
+
+		It("should return error because of empty request", func() {
+			errMsg := "Key: 'FindByIdRequest.id' Error:Field validation for 'id' failed on the 'valid-id' tag"
+			_, err := router.FindById(ctx, &pb.FindByIdRequest{})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return error because global repo is missing from context", func() {
+			errMsg := "unable to get global repo from context"
+
+			_, err := router.FindById(context.Background(), &pb.FindByIdRequest{
+				Id: 1,
+			})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return error because database error", func() {
+			errMsg := "database error"
+
+			usersRepo.EXPECT().FindById(int64(1)).Return(nil, errors.New(errMsg)).Times(1).Do(func(int64) {
+				defer GinkgoRecover()
+			})
+
+			_, err := router.FindById(ctx, &pb.FindByIdRequest{
+				Id: 1,
+			})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return a user by id", func() {
+			id := int64(1)
+
+			usersRepo.EXPECT().FindById(int64(1)).Return(&types.User{
+				ID: id,
+			}, nil).Times(1).Do(func(int64) {
+				defer GinkgoRecover()
+			})
+
+			res, err := router.FindById(ctx, &pb.FindByIdRequest{
+				Id: id,
+			})
+			Ω(err).To(BeNil())
+			Ω(res.GetUser().GetId()).To(Equal(id))
+		})
+
+	})
+
+	Describe("FindByEmail", func() {
+
+		It("should return error because of empty request", func() {
+			errMsg := "Key: 'FindByEmailRequest.email' Error:Field validation for 'email' failed on the 'valid-email' tag"
+			_, err := router.FindByEmail(ctx, &pb.FindByEmailRequest{})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return error because global repo is missing from context", func() {
+			errMsg := "unable to get global repo from context"
+
+			_, err := router.FindByEmail(context.Background(), &pb.FindByEmailRequest{
+				Email: "foo@bar.com",
+			})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return error because database error", func() {
+			errMsg := "database error"
+
+			usersRepo.EXPECT().FindByEmail("foo@bar.com").Return(nil, errors.New(errMsg)).Times(1).Do(func(string) {
+				defer GinkgoRecover()
+			})
+
+			_, err := router.FindByEmail(ctx, &pb.FindByEmailRequest{
+				Email: "foo@bar.com",
+			})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return a user by id", func() {
+			id := int64(1)
+
+			usersRepo.EXPECT().FindByEmail("foo@bar.com").Return(&types.User{
+				ID: id,
+			}, nil).Times(1).Do(func(string) {
+				defer GinkgoRecover()
+			})
+
+			res, err := router.FindByEmail(ctx, &pb.FindByEmailRequest{
+				Email: "foo@bar.com",
+			})
+			Ω(err).To(BeNil())
+			Ω(res.GetUser().GetId()).To(Equal(id))
+		})
+
+	})
+
+	Describe("Update", func() {
+
+		It("should return error because of empty request", func() {
+			errMsg := "Key: 'UpdateUserRequest.id' Error:Field validation for 'id' failed on the 'valid-id' tag"
+			_, err := router.Update(ctx, &pb.UpdateUserRequest{})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return error because global repo is missing from context", func() {
+			errMsg := "unable to get global repo from context"
+
+			_, err := router.Update(context.Background(), &pb.UpdateUserRequest{
+				Id:          1,
+				FirstName:   "Nick",
+				LastName:    "Doe2",
+				NewPassword: "1234",
+			})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return error because database error", func() {
+			errMsg := "database error"
+
+			usersRepo.EXPECT().FindById(int64(1)).Return(nil, errors.New(errMsg)).Times(1).Do(func(int64) {
+				defer GinkgoRecover()
+			})
+
+			_, err := router.Update(ctx, &pb.UpdateUserRequest{
+				Id:          1,
+				FirstName:   "Nick",
+				LastName:    "Doe2",
+				NewPassword: "1234",
+			})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should return error because database error", func() {
+			errMsg := "database error"
+
+			user := &types.User{
+				ID:        1,
+				FirstName: "Nick",
+				LastName:  "Doe2",
+				Email:     "foo@bar.com",
+			}
+
+			usersRepo.EXPECT().FindById(int64(1)).Return(user, nil).Times(1).Do(func(int64) {
+				defer GinkgoRecover()
+			})
+
+			usersRepo.EXPECT().Update(user).Return(errors.New(errMsg)).Times(1).Do(func(*types.User) {
+				defer GinkgoRecover()
+			})
+
+			_, err := router.Update(ctx, &pb.UpdateUserRequest{
+				Id:          1,
+				FirstName:   "Nick",
+				LastName:    "Doe2",
+				NewPassword: "1234",
+			})
+			Ω(err).NotTo(BeNil())
+			Ω(err.Error()).To(Equal(errMsg))
+		})
+
+		It("should successfully update a user", func() {
+
+			user := &types.User{
+				ID:        1,
+				FirstName: "Nick",
+				LastName:  "Doe2",
+				Email:     "foo@bar.com",
+			}
+
+			usersRepo.EXPECT().FindById(int64(1)).Return(user, nil).Times(1).Do(func(int64) {
+				defer GinkgoRecover()
+			})
+
+			usersRepo.EXPECT().Update(user).Return(nil).Times(1).Do(func(*types.User) {
+				defer GinkgoRecover()
+			})
+
+			_, err := router.Update(ctx, &pb.UpdateUserRequest{
+				Id:          1,
+				FirstName:   "Nick",
+				LastName:    "Doe2",
+				NewPassword: "1234",
+			})
+			Ω(err).To(BeNil())
+		})
+
+	})
+
 })

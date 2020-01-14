@@ -140,9 +140,7 @@ func (h *grpcHandler) Update(
 	}
 
 	if len(req.GetNewPassword()) > 0 {
-		if err = user.SetPassword(req.GetNewPassword()); err != nil {
-			return
-		}
+		user.SetPassword(req.GetNewPassword())
 	}
 
 	if err = usersRepo.Update(user); err != nil {
