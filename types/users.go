@@ -45,22 +45,17 @@ func NewUser(nu *TempUser) (user *User, err error) {
 		Visible:   true,
 	}
 
-	if err = user.SetPassword(nu.Password); err != nil {
-		return
-	}
+	user.SetPassword(nu.Password)
 
 	return
 }
 
 // SetPassword - use bcrypt to set the password hash
-func (u *User) SetPassword(password string) error {
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	if err != nil {
-		return err
-	}
+func (u *User) SetPassword(password string) {
+	hash, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
 	u.Password = string(hash)
-	return nil
+	return
 }
 
 // Authenticate - authenticates a password against the stored hash
@@ -79,6 +74,7 @@ func (u *User) Authenticate(password string) error {
 func (u *User) ToProtobuf() (nu *pb.User) {
 	nu = new(pb.User)
 
+	nu.Id = u.ID
 	nu.FirstName = u.FirstName
 	nu.LastName = u.LastName
 	nu.Email = u.Email

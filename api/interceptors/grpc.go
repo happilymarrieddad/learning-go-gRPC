@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func globalRepoInjector(db *xorm.Engine) grpc.UnaryServerInterceptor {
+func GlobalRepoInjector(db *xorm.Engine) grpc.UnaryServerInterceptor {
 	return grpc.UnaryServerInterceptor(func(
 		ctx context.Context,
 		req interface{},

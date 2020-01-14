@@ -11,6 +11,7 @@ require (
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/mock v1.3.1
 	github.com/golang/protobuf v1.3.2
+	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/onsi/ginkgo v1.11.0
