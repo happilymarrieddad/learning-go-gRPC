@@ -104,6 +104,13 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
 
 ## Section 6 - gRPC command line testing
 1. Install grpc_cli
+    - git clone -b $(curl -L https://grpc.io/release) https://github.com/grpc/grpc
+    - cd grpc
+    - git submodule update --init
+    - make grpc_cli
+    - sudo make install grpc_cli
+    - IF IT FAILS ON YOU DO THE FOLLOWING!!
+        - I just found out a workaround. If you add -Wno-unused-variable to the cppflags at line 356 of Makefile at grpc root folder, the complier will ignore the unused variable warning/error.
 2. Run grpc_cli ls command to see all available services
 3. Run grpc_cli call command to create a user
 4. Run grpc_cli call command to login with that user
