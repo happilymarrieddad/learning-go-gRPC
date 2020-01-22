@@ -2,9 +2,11 @@ package repos
 
 import (
 	"crypto/ed25519"
+	"errors"
 	"time"
 
 	"github.com/go-xorm/xorm"
+	"github.com/happilymarrieddad/learning-go-gRPC/types"
 	"github.com/pascaldekloe/jwt"
 )
 
@@ -21,14 +23,15 @@ func init() {
 	}
 }
 
-// Authrepo - the users repo interface
-type Authrepo interface {
+// AuthRepo - the users repo interface
+type AuthRepo interface {
 	GetNewClaims(subject string, set map[string]interface{}) *jwt.Claims
 	GetSignedToken(claims *jwt.Claims) (string, error)
+	GetDataFromToken(token string) (*types.User, error)
 }
 
-// NewAuthrepo - returns a new user repo
-func NewAuthrepo(db *xorm.Engine) Authrepo {
+// NewAuthRepo - returns a new user repo
+func NewAuthRepo(db *xorm.Engine) AuthRepo {
 	return &authRepo{db: db}
 }
 
@@ -58,4 +61,39 @@ func (a authRepo) GetSignedToken(claims *jwt.Claims) (string, error) {
 	}
 
 	return string(token), nil
+}
+
+func (a authRepo) GetDataFromToken(token string) (*types.User, error) {
+	claims, err := jwt.EdDSACheck([]byte(token), pub)
+	if err != nil {
+		return nil, err
+	}
+
+	userDataErr := errors.New("token is valid but user data missing or corrupt")
+	userData, ok := claims.Set["user"].(map[string]interface{})
+	if !ok {
+		return nil, userDataErr
+	}
+
+	user := new(types.User)
+
+	id, ok := userData["id"].(float64)
+	if !ok {
+		return nil, userDataErr
+	}
+	user.ID = int64(id)
+
+	email, ok := userData["email"].(string)
+	if !ok {
+		return nil, userDataErr
+	}
+	user.Email = email
+
+	visible, ok := userData["id"].(bool)
+	if !ok {
+		return nil, userDataErr
+	}
+	user.Visible = visible
+
+	return user, nil
 }
