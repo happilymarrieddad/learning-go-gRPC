@@ -115,6 +115,7 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
 ## Section 7 - JWT
 1. Create Auth repo
 2. Add `GetNewClaims` func
+ - go get -u github.com/pascaldekloe/jwt
 3. Add `GetSignedToken` func
 4. Add `GetDataFromToken` func
 5. Create tests file

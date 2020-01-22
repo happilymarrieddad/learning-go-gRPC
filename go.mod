@@ -16,6 +16,7 @@ require (
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/onsi/ginkgo v1.11.0
 	github.com/onsi/gomega v1.8.1
+	github.com/pascaldekloe/jwt v1.7.0
 	golang.org/x/crypto v0.0.0-20200109152110-61a87790db17
 	google.golang.org/grpc v1.26.0
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
