@@ -89,7 +89,7 @@ func (a authRepo) GetDataFromToken(token string) (*types.User, error) {
 	}
 	user.Email = email
 
-	visible, ok := userData["id"].(bool)
+	visible, ok := userData["visible"].(bool)
 	if !ok {
 		return nil, userDataErr
 	}
