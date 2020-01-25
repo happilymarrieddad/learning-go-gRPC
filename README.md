@@ -129,6 +129,7 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
 13. Run full test suite for auth
 14. Build api file to integrate routes
 15. Run grpc_cli call command to login with a user
+    - grpc_cli call localhost:8080 auth.V1Auth.Login "email:'foo@bar.com', password: '1234'"
 16. Intro to gRPC authentication
 17. Add JWT field to routes
 18. Add JWT checks to the interceptor
