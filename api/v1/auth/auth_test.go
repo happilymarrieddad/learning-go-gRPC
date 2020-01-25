@@ -35,7 +35,7 @@ var _ = Describe("grpc", func() {
 		globalRepo = repoMocks.NewMockGlobalRepository(mokCtrl)
 		authRepo = repoMocks.NewMockAuthRepo(mokCtrl)
 		usersRepo = repoMocks.NewMockUsersRepo(mokCtrl)
-		router = InitRoutes()
+		router = GetRoutes()
 
 		ctx = utils.SetGlobalRepoOnContext(context.Background(), globalRepo)
 

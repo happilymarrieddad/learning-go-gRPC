@@ -13,6 +13,7 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	// Routes
+	v1auth "github.com/happilymarrieddad/learning-go-gRPC/api/v1/auth"
 	v1users "github.com/happilymarrieddad/learning-go-gRPC/api/v1/users"
 )
 
@@ -30,7 +31,7 @@ func Run(port int, db *xorm.Engine) {
 		),
 	)
 
-	pb.RegisterV1UsersServer(s, v1users.GetRoutes())
+	initAllRoutes(s)
 
 	reflection.Register(s)
 
@@ -38,4 +39,9 @@ func Run(port int, db *xorm.Engine) {
 	if err = s.Serve(lis); err != nil {
 		panic(err)
 	}
+}
+
+func initAllRoutes(s *grpc.Server) {
+	pb.RegisterV1AuthServer(s, v1auth.GetRoutes())
+	pb.RegisterV1UsersServer(s, v1users.GetRoutes())
 }

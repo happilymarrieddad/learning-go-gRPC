@@ -10,8 +10,8 @@ import (
 type grpcHandler struct {
 }
 
-// InitRoutes init routes
-func InitRoutes() *grpcHandler {
+// GetRoutes init routes
+func GetRoutes() pb.V1AuthServer {
 	return &grpcHandler{}
 }
 
