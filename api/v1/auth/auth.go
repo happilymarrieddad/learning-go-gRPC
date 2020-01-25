@@ -40,7 +40,7 @@ func (h *grpcHandler) Login(
 		return
 	}
 
-	if user.Authenticate(req.GetPassword()); err != nil {
+	if err = user.Authenticate(req.GetPassword()); err != nil {
 		return
 	}
 
