@@ -133,6 +133,8 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
 16. Intro to gRPC authentication
 17. Add JWT field to routes
 18. Add JWT checks to the interceptor
+    - grpc_cli call localhost:8080 auth.V1Auth.Login "email:'foo@bar.com', password: '1234'"
+    - grpc_cli call localhost:8080 users.V1Users.Create "newUser:{firstName:'Nick2',lastName:'Doe2',email:'foo2@bar.com',password:'1234',confirmPassword:'1234'}"
 19. Test routes
 
 
