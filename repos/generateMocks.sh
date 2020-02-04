@@ -6,8 +6,9 @@ echo ""
 REPOS_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 ALL_REPOS=(
-    "UsersRepo"
+    "AuthRepo"
     "GlobalRepository"
+    "UsersRepo"
 )
 
 for repo in "${ALL_REPOS[@]}"

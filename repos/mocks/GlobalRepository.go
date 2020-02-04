@@ -33,6 +33,20 @@ func (m *MockGlobalRepository) EXPECT() *MockGlobalRepositoryMockRecorder {
 	return m.recorder
 }
 
+// Auth mocks base method
+func (m *MockGlobalRepository) Auth() repos.AuthRepo {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Auth")
+	ret0, _ := ret[0].(repos.AuthRepo)
+	return ret0
+}
+
+// Auth indicates an expected call of Auth
+func (mr *MockGlobalRepositoryMockRecorder) Auth() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Auth", reflect.TypeOf((*MockGlobalRepository)(nil).Auth))
+}
+
 // Users mocks base method
 func (m *MockGlobalRepository) Users() repos.UsersRepo {
 	m.ctrl.T.Helper()

@@ -94,13 +94,8 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
 11. Build `FindById` tests
 12. Build `FindByEmail` tests
 13. Build `Update` tests
-15. Run full test suite for users
-16. Flesh out auth `Login` route
-17. Build initial auth tests file
-18. Build `Login` tests
-19. Run full test suite for auth
-20. Build api file to integrate routes
-21. Create a main.go file to run the server
+14. Run full test suite for users
+15. Create a main.go file to run the server
 
 ## Section 6 - gRPC command line testing
 1. Install grpc_cli
@@ -111,8 +106,35 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
     - sudo make install grpc_cli
     - IF IT FAILS ON YOU DO THE FOLLOWING!!
         - I just found out a workaround. If you add -Wno-unused-variable to the cppflags at line 356 of Makefile at grpc root folder, the complier will ignore the unused variable warning/error.
+        - https://github.com/grpc/grpc/issues/16739
         - cp ./bins/opt/grpc_cli ~/go/bin
 2. Run grpc_cli ls command to see all available services
 3. Run grpc_cli call command to create a user
     - grpc_cli call localhost:8080 users.V1Users.Create "newUser:{firstName:'Nick',lastName:'Doe2',email:'foo@bar.com',password:'1234',confirmPassword:'1234'}"
-4. Run grpc_cli call command to login with that user
+
+## Section 7 - JWT
+1. Create Auth repo
+2. Add `GetNewClaims` func
+ - go get -u github.com/pascaldekloe/jwt
+3. Add `GetSignedToken` func
+4. Add `GetDataFromToken` func
+5. Create tests file
+6. Build `GetNewClaims` tests
+7. Build `GetSignedToken` tests
+8. Build `GetDataFromToken` tests
+9. Run full test suite for auth
+10. Flesh out auth `Login` route 
+11. Build initial auth tests file
+12. Build `Login` tests
+13. Run full test suite for auth
+14. Build api file to integrate routes
+15. Run grpc_cli call command to login with a user
+    - grpc_cli call localhost:8080 auth.V1Auth.Login "email:'foo@bar.com', password: '1234'"
+16. Intro to gRPC authentication
+17. Add JWT field to routes
+18. Add JWT checks to the interceptor
+    - grpc_cli call localhost:8080 auth.V1Auth.Login "email:'foo@bar.com', password: '1234'"
+    - grpc_cli call localhost:8080 users.V1Users.Create "newUser:{firstName:'Nick2',lastName:'Doe2',email:'foo2@bar.com',password:'1234',confirmPassword:'1234'}"
+19. Test routes
+
+

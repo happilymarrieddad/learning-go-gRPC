@@ -21,11 +21,11 @@ func (m *V1UsersMock) Create(ctx context.Context, req *CreateUserRequest) (*User
 	res :=
 		&UserReply{
 			User: &User{
-				Id:        30,
-				FirstName: "iure",
-				LastName:  "omnis",
-				Email:     "1Rose@Flashpoint.info",
-				Visible:   true,
+				Id:        42,
+				FirstName: "est",
+				LastName:  "perferendis",
+				Email:     "dolorum@BlogXS.name",
+				Visible:   false,
 			},
 		}
 	return res, nil
@@ -34,10 +34,10 @@ func (m *V1UsersMock) FindById(ctx context.Context, req *FindByIdRequest) (*User
 	res :=
 		&UserReply{
 			User: &User{
-				Id:        260,
-				FirstName: "ut",
-				LastName:  "sapiente",
-				Email:     "vGutierrez@Plajo.org",
+				Id:        554,
+				FirstName: "asperiores",
+				LastName:  "est",
+				Email:     "iGonzales@Chatterbridge.biz",
 				Visible:   true,
 			},
 		}
@@ -47,10 +47,10 @@ func (m *V1UsersMock) FindByEmail(ctx context.Context, req *FindByEmailRequest) 
 	res :=
 		&UserReply{
 			User: &User{
-				Id:        832,
-				FirstName: "ea",
-				LastName:  "quo",
-				Email:     "ArthurGarcia@Kwideo.name",
+				Id:        25,
+				FirstName: "distinctio",
+				LastName:  "nihil",
+				Email:     "EarlGriffin@Babbleblab.net",
 				Visible:   true,
 			},
 		}
@@ -60,10 +60,10 @@ func (m *V1UsersMock) Update(ctx context.Context, req *UpdateUserRequest) (*User
 	res :=
 		&UserReply{
 			User: &User{
-				Id:        585,
-				FirstName: "nostrum",
-				LastName:  "accusantium",
-				Email:     "ut_optio_dolores@Quaxo.net",
+				Id:        704,
+				FirstName: "veritatis",
+				LastName:  "eum",
+				Email:     "NicholasKnight@Brainsphere.info",
 				Visible:   true,
 			},
 		}
