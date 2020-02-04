@@ -7,6 +7,12 @@ protoc:
 		--gogrpcmock_out=:pb \
 		pb/v1/*.proto
 
+protoc-js:
+	protoc -I pb/v1/ \
+		--js_out=import_style=commonjs:pb/js \
+		--grpc-web_out=import_style=commonjs,mode=grpcwebtext:pb/js \
+		pb/v1/*.proto
+
 install:
 	go get -u \
 		github.com/golang/protobuf/proto \
