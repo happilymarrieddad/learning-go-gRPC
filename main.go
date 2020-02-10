@@ -17,5 +17,5 @@ func main() {
 		panic(err)
 	}
 
-	api.Run(8080, db)
+	api.Run(50051, db)
 }

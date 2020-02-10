@@ -20,7 +20,7 @@ type V1AuthMock struct{}
 func (m *V1AuthMock) Login(ctx context.Context, req *LoginRequest) (*LoginReply, error) {
 	res :=
 		&LoginReply{
-			Token: "eum",
+			Token: "officiis",
 		}
 	return res, nil
 }
