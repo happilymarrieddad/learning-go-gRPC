@@ -17,7 +17,7 @@ export default {
   name: "app",
   methods: {
     run() {
-      const client = new authClient.V1AuthClient("localhost:8080", null, null)
+      const client = new authClient.V1AuthClient("http://localhost:8080", null, null)
       const request = new authObjs.LoginRequest()
       request.setEmail("foo@bar.com")
       request.setPassword("1234")
@@ -25,11 +25,13 @@ export default {
       console.log(client)
       console.log(request)
 
-      client.login(request, {}, (err, resp) => {
+      client.login(request, {'custom-header-1': 'value1'}, (err, resp) => {
         console.log("Error")
         console.log(err)
         console.log("Response")
         console.log(resp)
+
+        console.log(resp.getToken())
       })
     }
   }

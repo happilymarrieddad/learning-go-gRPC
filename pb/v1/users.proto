@@ -15,14 +15,17 @@ service V1Users {
 
 message CreateUserRequest {
     types.CreateUser newUser = 1;
+    string JWT = 2;
 }
 
 message FindByIdRequest {
     int64 id = 1;
+    string JWT = 2;
 }
 
 message FindByEmailRequest {
     string email = 1;
+    string JWT = 2;
 }
 
 message UpdateUserRequest {
@@ -30,6 +33,7 @@ message UpdateUserRequest {
     string firstName = 2;
     string lastName = 3;
     string newPassword = 4;
+    string JWT = 5;
 }
 
 message UserReply {

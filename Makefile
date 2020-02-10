@@ -24,7 +24,8 @@ install:
 		github.com/onsi/ginkgo/ginkgo \
 		github.com/onsi/gomega/... \
 		github.com/SafetyCulture/s12-proto/protobuf/protoc-gen-gogrpcmock \
-		github.com/go-sql-driver/mysql
+		github.com/go-sql-driver/mysql \
+		github.com/pascaldekloe/jwt
 	go install github.com/SafetyCulture/s12-proto/protobuf/protoc-gen-gogrpcmock
 	go get -tags 'mysql' -u github.com/golang-migrate/migrate/cmd/migrate
 	go get github.com/golang/mock/mockgen
@@ -34,3 +35,14 @@ clean:
 
 test:
 	ginkgo -r -failFast
+
+gen-keys:
+	openssl req \
+       -newkey rsa:2048 -nodes -keyout ./grpservice.key \
+       -x509 -days 365 -out ./grpservice.crt
+
+start-proxy:
+	grpcwebproxy \
+		--backend_addr=localhost:50051 \
+		--run_tls_server=false \
+    	--allow_all_origins
