@@ -138,3 +138,11 @@ ln -s /protoc3/bin/protoc /usr/bin/protoc
 19. Test routes
 
 
+
+## GRPC-WEB
+https://github.com/grpc/grpc-web
+https://github.com/improbable-eng/grpc-web/tree/master/go/grpcwebproxy
+
+install into our project
+
+npm install grpc grpc-web google-protobuf --save
